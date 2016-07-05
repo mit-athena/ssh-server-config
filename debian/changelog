@@ -1,3 +1,13 @@
+debathena-ssh-server-config (1.11) unstable; urgency=medium
+
+  * Remove the workaround that disabled GSSAPI if there’s no keytab,
+    because the problem it addressed was only present with
+    GSSAPIKeyExchange=yes clients, the workaround is no longer effective
+    at addressing this problem on any supported releases, and it is
+    incompatible with systemd (Trac: #1562).
+
+ -- Anders Kaseorg <andersk@mit.edu>  Tue, 05 Jul 2016 01:36:38 -0400
+
 debathena-ssh-server-config (1.10) unstable; urgency=low
 
   [ Jonathan Reed ]
