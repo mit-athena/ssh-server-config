@@ -1,3 +1,9 @@
+debathena-ssh-server-config (1.12) unstable; urgency=medium
+
+  * Remove debathena-ssh-server build dependency.
+
+ -- Anders Kaseorg <andersk@mit.edu>  Sun, 13 Nov 2016 20:10:04 -0500
+
 debathena-ssh-server-config (1.11) unstable; urgency=medium
 
   * Remove the workaround that disabled GSSAPI if there’s no keytab,
