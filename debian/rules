@@ -8,6 +8,13 @@ DEB_UNDIVERT_FILES_debathena-ssh-server-config += \
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/config-package.mk
 
+ifneq ($(wildcard /usr/share/openssh/sshd_config),)
+
+PRIVSEP = yes
+debian/sshd_config.debathena-orig: $(call debian_check_files,/usr/share/openssh/sshd_config)
+	cp $< $@
+
+else
 ifeq ($(shell dpkg --compare-versions \
 	"`dpkg-query --showformat='$${Version}' --show openssh-server`" ">=" 1:4.3 && echo y),y)
 
@@ -21,6 +28,7 @@ PRIVSEP = no
 debian/sshd_config.debathena-orig: /var/lib/dpkg/info/ssh-krb5.postinst
 	perl -0pe 's/^.*<<EOF[^\n]*\n(.*\n)EOF\n.*<<EOF[^\n]*\n.*\nEOF\n.*<<EOF[^\n]*\n(.*\n)EOF\n.*<<EOF[^\n]*\n(.*\n)EOF\n.*$$/$$1$$2$$3/s or die;' $< > $@
 
+endif
 endif
 
 common-build-indep:: debian/sshd_config.debathena
